@@ -6,25 +6,43 @@
 //async_fifo_verification
 
 
-module async_fifo #(
-  parameter DATA_WIDTH = 8,
-  parameter FIFO_DEPTH  = 16)(
-  input logic wr_clk,
-  input logic wr_rst_n,
-  input logic wr_en,
-  input  logic [DATA_WIDTH-1:0] data_in,
-  input logic rd_clk,
-  input logic rd_rst_n,
-  input logic rd_en,
-  output logic [DATA_WIDTH-1:0] data_out,
-  output logic empty,
-  output logic full
-);
-  localparam PTR_WIDTH = $clog2(FIFO_DEPTH);
-  logic [DATA_WIDTH-1:0] mem [FIFO_DEPTH-1:0];
-  logic [PTR_WIDTH:0] wr_ptr_bin;
-  logic [PTR_WIDTH:0] rd_ptr_bin;
-  logic [PTR_WIDTH:0] wr_ptr_gray;
-  logic [PTR_WIDTH:0] rd_ptr_gray;
 
+module regular_fifo(
+  input logic clk,
+  input logic rst,
+  input logic wr_en, 
+  input logic [7:0] wr_data,
+  input logic rd_en,
+  output logic [7:0] rd_data,
+  output logic full,
+  output logic empty
+);
+  logic [7:0] mem [0:15];
+  logic [4:0] w_ptr;
+  logic [4:0] r_ptr;
+  
+  always@(posedge clk or negedge rst) begin
+    if(!rst) begin
+      w_ptr <= 0;
+      r_ptr <= 0;
+    end
+    
+    else begin
+      if(wr_en && !full) begin
+        mem[w_ptr[3:0]] <= wr_data;
+      	w_ptr <= w_ptr+1;
+    end
+    
+      if(rd_en && !empty) begin
+      	r_ptr <= r_ptr+1;    
+    end
+      
+    end
+    
+  end
+  
+  assign rd_data = mem[r_ptr[3:0]];
+  assign empty = (w_ptr == r_ptr);
+  assign full  = (w_ptr[3:0] == r_ptr[3:0]) && (w_ptr[4] != r_ptr[4]);  
+  
 endmodule
