@@ -1,26 +1,42 @@
-# 🧠 Async FIFO RTL Project
+# 🔁 Async FIFO RTL & Verification Project
 
-✨ Initial SystemVerilog RTL skeleton for an asynchronous FIFO design.  
-The design includes parameterized memory, read/write pointers, and a basic architecture foundation for a full CDC-safe FIFO implementation.
-
----
-
-## 🔧 Current Progress
-- 🧱 RTL skeleton implemented in SystemVerilog  
-- 📦 Parameterized FIFO (DATA_WIDTH / FIFO_DEPTH)  
-- 📍 Read & write pointer structure added  
-- 💾 Memory array defined  
-
----
-
-## 🚀 Next Steps
-- 🔄 Implement Gray code pointers for CDC safety  
-- 🔗 Add clock domain synchronization (write ↔ read)  
-- ⚠️ Implement full / empty logic  
-- 🧪 Build verification environment (testbench + checks)  
-- 📊 Add directed + random test scenarios  
+A step-by-step journey from a synchronous FIFO to a fully verified,
+CDC-safe asynchronous FIFO in SystemVerilog.
 
 ---
 
 ## 🎯 Goal
-Build a robust, verification-ready asynchronous FIFO suitable for real-world CDC design practice and interview-level projects.
+
+Build a robust, verification-ready asynchronous FIFO suitable for
+real-world CDC design practice and interview-level projects.
+
+---
+
+## 🗺️ Roadmap
+
+### ✅ Stage 1 — Synchronous FIFO (RTL)
+- [x] Parameterized memory array (DATA_WIDTH / FIFO_DEPTH)
+- [x] Read & write pointers with wrap-around bit
+- [x] Full / empty logic
+- [x] Simultaneous read & write support
+
+### 🔄 Stage 2 — Synchronous FIFO (Verification)
+- [ ] Directed testbench (write, read, full, empty, simultaneous)
+- [ ] Random test scenarios
+- [ ] Assertions (SVA) for full / empty correctness
+
+### ⏳ Stage 3 — Async FIFO (RTL)
+- [ ] Gray code pointers for CDC safety
+- [ ] 2-FF synchronizers (write ↔ read domain)
+- [ ] Full / empty logic across clock domains
+
+### ⏳ Stage 4 — Async FIFO (Verification)
+- [ ] Formal verification with SymbiYosys / JasperGold
+- [ ] FIFO contract proof (two consecutive values)
+- [ ] Cover properties (fill / drain)
+
+---
+
+## 📖 References
+
+- [ZipCPU — Crossing clock domains with an Async FIFO](https://zipcpu.com/blog/2018/07/06/afifo.html)
