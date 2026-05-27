@@ -4,3 +4,4 @@
 `include "async_fifo_sequence.sv"
 `include "async_fifo_sequencer.sv"
 `include "async_fifo_driver.sv"
+`include "async_fifo_seq_lib.sv"
