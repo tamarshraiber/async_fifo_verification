@@ -19,12 +19,13 @@ class async_fifo_seq_item extends uvm_sequence_item;
   `uvm_object_utils_end
   
   
-  constraint no_wr_when_full_c {
-    if(full) wr_en == 1'b0;
-   }
-  constraint no_rd_when_empty_c {
-    if(empty) rd_en == 1'b0;
-    }  
+	constraint wr_en_dist {
+ 	wr_en dist {1 := 60, 0 := 40};
+	}
+
+	constraint rd_en_dist {
+  	rd_en dist {1 := 60, 0 := 40};
+	}
   
     function new(string name = "async_fifo_seq_item");
     super.new(name);
