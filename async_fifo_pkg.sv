@@ -1,3 +1,6 @@
 `include "uvm_macros.svh"
 `include "async_fifo_if.sv"
 `include "async_fifo_seq_item.sv"
+`include "async_fifo_sequence.sv"
+`include "async_fifo_sequencer.sv"
+`include "async_fifo_driver.sv"
